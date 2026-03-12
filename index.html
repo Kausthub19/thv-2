@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Treasure Hunt Puzzles</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f0e1, #e6d7b8);
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #b8860b;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .compass {
+            width: 60px;
+            height: 60px;
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
+        .puzzle {
+            display: none;
+            padding: 2rem;
+        }
+        .visible {
+            display: block;
+        }
+        input[type=text] {
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+        .clue {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <svg class="compass" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" stroke="#333" stroke-width="4" fill="#fff" />
+        <polygon points="50,10 58,50 50,45 42,50" fill="#b8860b" />
+        <polygon points="50,90 58,50 50,55 42,50" fill="#333" />
+    </svg>
+    <span>Treasure Hunt</span>
+</header>
+
+<!-- Puzzle sections -->
+<section id="puzzle1" class="puzzle">
+    <h2>Riddle 1</h2>
+    <p>Riddle 1 text goes here.</p>
+    <input id="answer1" type="text" placeholder="Type your answer" />
+    <button onclick="checkAnswer(1)">Submit</button>
+    <div id="feedback1"></div>
+</section>
+
+<section id="puzzle2" class="puzzle">
+    <h2>Riddle 2</h2>
+    <p>Riddle 2 text goes here.</p>
+    <input id="answer2" type="text" placeholder="Type your answer" />
+    <button onclick="checkAnswer(2)">Submit</button>
+    <div id="feedback2"></div>
+</section>
+
+<section id="puzzle3" class="puzzle">
+    <h2>Riddle 3</h2>
+    <p>Riddle 3 text goes here.</p>
+    <input id="answer3" type="text" placeholder="Type your answer" />
+    <button onclick="checkAnswer(3)">Submit</button>
+    <div id="feedback3"></div>
+</section>
+
+<script>
+function getPuzzleNumber() {
+    const params = new URLSearchParams(window.location.search);
+    const p = params.get('p');
+    const n = parseInt(p, 10);
+    if (!isNaN(n) && n >= 1 && n <= 3) {
+        return n;
+    }
+    return 1; // default
+}
+
+function showPuzzle(n) {
+    document.querySelectorAll('.puzzle').forEach(sec => sec.classList.remove('visible'));
+    const sel = document.getElementById('puzzle' + n);
+    if (sel) sel.classList.add('visible');
+}
+
+function checkAnswer(n) {
+    const user = document.getElementById('answer' + n).value.trim().toLowerCase();
+    const correct = 'answer' + n;
+    const feedback = document.getElementById('feedback' + n);
+    if (user === correct) {
+        feedback.innerHTML = '<div class="clue">Congratulations! \nYour clue: clue ' + n + '</div>';
+    } else {
+        feedback.textContent = 'Incorrect, try again.';
+    }
+}
+
+// on load
+const puzzleNum = getPuzzleNumber();
+showPuzzle(puzzleNum);
+</script>
+</body>
+</html>
