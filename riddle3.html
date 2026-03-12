@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Treasure Hunt Puzzles</title>
+    <title>Treasure Hunt Riddle Three</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -24,11 +24,8 @@
             margin-right: 0.5rem;
         }
         .puzzle {
-            display: none;
-            padding: 2rem;
-        }
-        .visible {
             display: block;
+            padding: 2rem;
         }
         input[type=text] {
             padding: 0.5rem;
@@ -54,13 +51,12 @@
         <polygon points="50,10 58,50 50,45 42,50" fill="#b8860b" />
         <polygon points="50,90 58,50 50,55 42,50" fill="#333" />
     </svg>
-    <span>Treasure Hunt</span>
+    <span>Treasure Hunt - Riddle 3</span>
 </header>
 
-<!-- Puzzle section -->
-<section id="puzzle" class="puzzle visible">
-    <h2>Riddle</h2>
-    <p>Riddle text goes here.</p>
+<section id="puzzle" class="puzzle">
+    <h2>Riddle Three</h2>
+    <p>Riddle text goes here for puzzle three.</p>
     <input id="answer" type="text" placeholder="Type your answer" />
     <button onclick="checkAnswer()">Submit</button>
     <div id="feedback"></div>
@@ -70,8 +66,8 @@
 function checkAnswer() {
     const user = document.getElementById('answer').value.trim().toLowerCase();
     const feedback = document.getElementById('feedback');
-    if (user === 'answer1') {
-        feedback.innerHTML = '<div class="clue">Congratulations!\nYour clue: clue 1</div>';
+    if (user === 'answer3') {
+        feedback.innerHTML = '<div class="clue">Congratulations!\nYour clue: clue 3</div>';
     } else {
         feedback.textContent = 'Incorrect, try again.';
     }
